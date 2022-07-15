@@ -1,6 +1,7 @@
 #include "Widget.h"
 
 #include <QTimer>
+#include <QDebug>
 
 using namespace std;
 
@@ -20,14 +21,33 @@ Widget::Widget(QWidget* parent)
 }
 
 Widget::~Widget() {
-    delete engine;
+    // delete engine; // TODO
+}
+
+QPointF Widget::mapToScreen(const Vector& p) {
+    double x = p.x;
+    double y = p.y;
+    y = -y;
+    auto w = size().width();
+    auto h = size().height();
+    auto m = min(w, h) / 2;
+    x = x * m + w / 2;
+    y = y * m + h / 2;
+    return {x, y};
+}
+
+double Widget::mapToScreen(double r) {
+    auto w = size().width();
+    auto h = size().height();
+    auto m = min(w, h) / 2;
+    return r * m;
 }
 
 void Widget::paintEvent(QPaintEvent* e) {
     Q_UNUSED(e);
 
     QPainter qp(this);
-    engine->draw(&qp, size());
+    draw(&qp);
 }
 
 void Widget::keyPressEvent(QKeyEvent* e) {
@@ -80,6 +100,31 @@ void Widget::keyReleaseEvent(QKeyEvent* e) {
     }
 
     update();
+}
+
+void Widget::draw(QPainter* qp) {
+    double r;
+    // Draw circle
+    r = mapToScreen(1);
+    qp->drawEllipse(mapToScreen({0, 0, 0}), r, r);
+
+    // Brushes
+    QBrush brush = qp->brush();
+    brush.setStyle(Qt::SolidPattern);
+    QPen pen = qp->pen();
+    pen.setWidthF(0.5);
+    qp->setPen(pen);
+
+    // Draw tail
+    for (const auto& pt : engine->getTail()) {
+        auto color = pt.z > 0 ? Qt::red : Qt::green;
+
+        brush.setColor(color);
+        qp->setBrush(brush);
+
+        r = (pt.z + 1) * 2 + 1;
+        qp->drawEllipse(mapToScreen(pt), r, r);
+    }
 }
 
 void Widget::moveTimeout() {

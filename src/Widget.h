@@ -15,9 +15,14 @@ class Widget : public QWidget {
     private:
         Engine* engine;
 
+        QPointF mapToScreen(const Vector& p);
+        double mapToScreen(double r);
+
         void paintEvent(QPaintEvent*);
         void keyPressEvent(QKeyEvent*);
         void keyReleaseEvent(QKeyEvent*);
+
+        void draw(QPainter* qp);
 
         void moveTimeout();
         void tailTimeout();
