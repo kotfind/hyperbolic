@@ -1,6 +1,7 @@
 #include "Vector.h"
 
 #include <QDebug>
+#include <math.h>
 
 Vector::Vector()
         : Vector(0, 0, 0) {
@@ -40,4 +41,63 @@ Vector Vector::projected(const Matrix& m) const {
         }
     }
     return ans;
+}
+
+double Vector::len() const {
+    double sum = 0;
+    for (int i = 0; i < 3; ++i) {
+        sum += (*this)(i) * (*this)(i);
+    }
+    return sqrt(sum);
+}
+
+Vector operator-(const Vector& v) {
+    auto ans = v;
+    for (int i = 0; i < 3; ++i) {
+        ans(i) = -ans(i);
+    }
+    return ans;
+}
+
+Vector& operator+=(Vector& lhs, const Vector& rhs) {
+    for (int i = 0; i < 3; ++i) {
+        lhs(i) += rhs(i);
+    }
+    return lhs;
+}
+
+Vector& operator-=(Vector& lhs, const Vector& rhs) {
+    for (int i = 0; i < 3; ++i) {
+        lhs(i) -= rhs(i);
+    }
+    return lhs;
+}
+
+Vector& operator*=(Vector& lhs, double rhs) {
+    for (int i = 0; i < 3; ++i) {
+        lhs(i) *= rhs;
+    }
+    return lhs;
+}
+
+Vector operator+(const Vector& lhs, const Vector& rhs) {
+    auto ans = lhs;
+    ans += rhs;
+    return ans;
+}
+
+Vector operator-(const Vector& lhs, const Vector& rhs) {
+    auto ans = lhs;
+    ans -= rhs;
+    return ans;
+}
+
+Vector operator*(const Vector& lhs, double rhs) {
+    auto ans = lhs;
+    ans *= rhs;
+    return ans;
+}
+
+Vector operator*(double lhs, const Vector& rhs) {
+    return rhs * lhs;
 }

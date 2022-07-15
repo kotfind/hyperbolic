@@ -1,5 +1,6 @@
-#include "SphereEngine.h"
 #include "Engine.h"
+#include "SphereEngine.h"
+#include "PlaneEngine.h"
 
 #include <QWidget>
 #include <QPaintEvent>
