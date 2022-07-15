@@ -2,13 +2,11 @@
 
 #include "Vector.h"
 #include "Matrix.h"
-
-#include <QPaintEvent>
-#include <QPainter>
+#include "Engine.h"
 
 #include <list>
 
-class SphereEngine {
+class SphereEngine : public Engine {
     public:
         SphereEngine();
 

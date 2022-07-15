@@ -1,4 +1,5 @@
 #include "SphereEngine.h"
+#include "Engine.h"
 
 #include <QWidget>
 #include <QPaintEvent>
@@ -12,7 +13,7 @@ class Widget : public QWidget {
         ~Widget();
 
     private:
-        SphereEngine* engine;
+        Engine* engine;
 
         void paintEvent(QPaintEvent*);
         void keyPressEvent(QKeyEvent*);
