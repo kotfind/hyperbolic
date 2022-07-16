@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "SphereEngine.h"
 #include "PlaneEngine.h"
+#include "LeapMotion.h"
 
 #include <QWidget>
 #include <QPaintEvent>
@@ -12,6 +13,8 @@
 #include <QFocusEvent>
 
 class Canvas : public QWidget {
+    Q_OBJECT
+
     public:
         Canvas(QWidget* parent = nullptr);
         ~Canvas();
@@ -21,6 +24,8 @@ class Canvas : public QWidget {
         PlaneEngine* planeEngine;
         SphereEngine* sphereEngine;
         Engine::EngineType engineType;
+
+        LeapMotion* leapmotion;
 
         QPointF mapToScreen(const Vector& p);
         double mapToScreen(double r);
@@ -35,10 +40,13 @@ class Canvas : public QWidget {
         void moveTimeout();
         void tailTimeout();
 
-        int horDir = 0; // -1, 0 or 1
-        int vertDir = 0; // -1, 0 or 1
+        double horDir = 0; // -1, 0 or 1
+        double vertDir = 0; // -1, 0 or 1
 
     public slots:
         void setTailLength(int l);
         void setEngineType(Engine::EngineType type);
+
+    private slots:
+        void setDirs(double horDir, double vertDir);
 };

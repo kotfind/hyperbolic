@@ -11,7 +11,7 @@ SphereEngine::SphereEngine() {
     rMatrix.toIdentity();
 }
 
-void SphereEngine::move(int horDir, int vertDir) {
+void SphereEngine::move(double horDir, double vertDir) {
     matrix.xrot(-alpha * vertDir);
     matrix.yrot(-alpha * horDir);
 

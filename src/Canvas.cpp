@@ -10,9 +10,10 @@ Canvas::Canvas(QWidget* parent)
     planeEngine = new PlaneEngine;
     sphereEngine = new SphereEngine;
 
+    leapmotion = new LeapMotion;
+
     engineType = Engine::PlaneEngineType;
     engine = planeEngine;
-
     auto* tailTimer = new QTimer(this);
     connect(tailTimer, &QTimer::timeout,
             this, &Canvas::tailTimeout);
@@ -136,7 +137,15 @@ void Canvas::draw(QPainter* qp) {
 }
 
 void Canvas::moveTimeout() {
-    engine->move(max(-1, min(1, horDir)), max(-1, min(1, vertDir)));
+    if (leapmotion->validDirs) {
+        engine->move(
+            max(-1., min(1., leapmotion->horDir)),
+            max(-1., min(1., leapmotion->vertDir)));
+    }
+
+    engine->move(
+        max(-1., min(1., horDir)),
+        max(-1., min(1., vertDir)));
     update();
 }
 
@@ -160,4 +169,9 @@ void Canvas::setEngineType(Engine::EngineType type) {
             engine = sphereEngine;
             break;
     }
+}
+
+void Canvas::setDirs(double hor, double vert) {
+    horDir = hor;
+    vertDir = vert;
 }

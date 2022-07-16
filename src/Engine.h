@@ -15,7 +15,7 @@ class Engine {
 
         Engine();
 
-        virtual void move(int horDir, int vertDir) = 0;
+        virtual void move(double horDir, double vertDir) = 0;
         virtual Vector mapToGlobal(const Vector& pt) const = 0;
         virtual Vector mapToLocal(const Vector& pt) const = 0;
         virtual EngineType getType() const = 0;

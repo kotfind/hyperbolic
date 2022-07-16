@@ -7,7 +7,7 @@ const double speed = 0.01;
 PlaneEngine::PlaneEngine() {
 }
 
-void PlaneEngine::move(int horDir, int vertDir) {
+void PlaneEngine::move(double horDir, double vertDir) {
     auto nOffset = offset + Vector(horDir, vertDir, 0) * speed;
     if (nOffset.len() < 1) {
         offset = nOffset;
