@@ -101,6 +101,12 @@ void Canvas::keyReleaseEvent(QKeyEvent* e) {
     update();
 }
 
+void Canvas::focusOutEvent(QFocusEvent* e) {
+    Q_UNUSED(e);
+    horDir = 0;
+    vertDir = 0;
+}
+
 void Canvas::paintEvent(QPaintEvent* e) {
     Q_UNUSED(e);
 
@@ -134,7 +140,7 @@ void Canvas::draw(QPainter* qp) {
 }
 
 void Canvas::moveTimeout() {
-    engine->move(horDir, vertDir);
+    engine->move(max(-1, min(1, horDir)), max(-1, min(1, vertDir)));
     update();
 }
 

@@ -9,6 +9,7 @@
 #include <QPainter>
 #include <QKeyEvent>
 #include <QTimerEvent>
+#include <QFocusEvent>
 
 class Canvas : public QWidget {
     public:
@@ -26,6 +27,7 @@ class Canvas : public QWidget {
 
         void keyPressEvent(QKeyEvent*);
         void keyReleaseEvent(QKeyEvent*);
+        void focusOutEvent(QFocusEvent*);
         void paintEvent(QPaintEvent*);
 
         void draw(QPainter* qp);
