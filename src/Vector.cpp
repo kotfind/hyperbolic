@@ -80,6 +80,13 @@ Vector& operator*=(Vector& lhs, double rhs) {
     return lhs;
 }
 
+Vector& operator/=(Vector& lhs, double rhs) {
+    for (int i = 0; i < 3; ++i) {
+        lhs(i) /= rhs;
+    }
+    return lhs;
+}
+
 Vector operator+(const Vector& lhs, const Vector& rhs) {
     auto ans = lhs;
     ans += rhs;
@@ -92,6 +99,14 @@ Vector operator-(const Vector& lhs, const Vector& rhs) {
     return ans;
 }
 
+double operator*(const Vector& lhs, const Vector& rhs) {
+    double sum = 0;
+    for (int i = 0; i < 3; ++i) {
+        sum += lhs(i) * rhs(i);
+    }
+    return sum;
+}
+
 Vector operator*(const Vector& lhs, double rhs) {
     auto ans = lhs;
     ans *= rhs;
@@ -100,6 +115,12 @@ Vector operator*(const Vector& lhs, double rhs) {
 
 Vector operator*(double lhs, const Vector& rhs) {
     return rhs * lhs;
+}
+
+Vector operator/(const Vector& lhs, double rhs) {
+    auto ans = lhs;
+    ans /= rhs;
+    return ans;
 }
 
 bool operator==(const Vector& lhs, const Vector& rhs) {

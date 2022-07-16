@@ -22,11 +22,14 @@ Vector& operator+=(Vector& lhs, const Vector& rhs);
 Vector& operator-=(Vector& lhs, const Vector& rhs);
 Vector& operator*=(Vector& lhs, double rhs);
 Vector& operator*=(double& lhs, const Vector& rhs);
+Vector& operator/=(Vector& lhs, double rhs);
 
 Vector operator+(const Vector& lhs, const Vector& rhs);
 Vector operator-(const Vector& lhs, const Vector& rhs);
+double operator*(const Vector& lhs, const Vector& rhs);
 Vector operator*(const Vector& lhs, double rhs);
 Vector operator*(double lhs, const Vector& rhs);
+Vector operator/(const Vector& lhs, double rhs);
 
 bool operator==(const Vector& lhs, const Vector& rhs);
 bool operator!=(const Vector& lhs, const Vector& rhs);

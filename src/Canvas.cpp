@@ -9,6 +9,7 @@ Canvas::Canvas(QWidget* parent)
         : QWidget(parent) {
     planeEngine = new PlaneEngine;
     sphereEngine = new SphereEngine;
+    hyperbolicEngine = new HyperbolicEngine;
 
     leapmotion = new LeapMotion;
 
@@ -29,6 +30,7 @@ Canvas::~Canvas() {
     engine = nullptr;
     delete sphereEngine;
     delete planeEngine;
+    delete hyperbolicEngine;
 }
 
 QPointF Canvas::mapToScreen(const Vector& p) {
@@ -119,7 +121,11 @@ void Canvas::draw(QPainter* qp) {
     double r;
     // Draw circle
     r = mapToScreen(1);
-    qp->drawEllipse(mapToScreen(engine->mapToGlobal({0, 0, 0})), r, r);
+    qp->drawEllipse(
+        mapToScreen(engineType == Engine::PlaneEngineType
+            ? engine->mapToGlobal({0, 0, 1})
+            : Vector(0, 0, 0)),
+        r, r);
 
     // Brushes
     QBrush brush = qp->brush();
@@ -167,6 +173,10 @@ void Canvas::setEngineType(Engine::EngineType type) {
 
         case Engine::SphereEngineType:
             engine = sphereEngine;
+            break;
+
+        case Engine::HyperbolicEngineType:
+            engine = hyperbolicEngine;
             break;
     }
 }

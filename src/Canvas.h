@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "SphereEngine.h"
 #include "PlaneEngine.h"
+#include "HyperbolicEngine.h"
 #include "LeapMotion.h"
 
 #include <QWidget>
@@ -23,6 +24,7 @@ class Canvas : public QWidget {
         Engine* engine;
         PlaneEngine* planeEngine;
         SphereEngine* sphereEngine;
+        HyperbolicEngine* hyperbolicEngine;
         Engine::EngineType engineType;
 
         LeapMotion* leapmotion;

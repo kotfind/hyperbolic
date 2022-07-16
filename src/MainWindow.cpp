@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget* parent)
     auto* geomCombo = new QComboBox(this);
     geomCombo->addItem(tr("Plane"), Engine::PlaneEngineType);
     geomCombo->addItem(tr("Sphere"), Engine::SphereEngineType);
+    geomCombo->addItem(tr("Hyperbolic"), Engine::HyperbolicEngineType);
     connect(geomCombo, &QComboBox::currentTextChanged, [=](const QString& s) {
         canvas->setEngineType(geomCombo->currentData().value<Engine::EngineType>());
     });

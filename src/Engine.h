@@ -11,6 +11,7 @@ class Engine {
         enum EngineType {
             PlaneEngineType,
             SphereEngineType,
+            HyperbolicEngineType,
         };
 
         Engine();
