@@ -12,7 +12,7 @@ void Engine::updateTail(bool isStatic) {
     if (!isStatic) {
         tail.push_back(mapToLocal(center));
     }
-    while (tail.size() > maxTail) {
+    while (tail.size() > tailLength) {
         tail.pop_front();
     }
 }

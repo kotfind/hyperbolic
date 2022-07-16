@@ -32,4 +32,7 @@ class Canvas : public QWidget {
 
         int horDir = 0; // -1, 0 or 1
         int vertDir = 0; // -1, 0 or 1
+
+    public slots:
+        void setTailLength(int l);
 };

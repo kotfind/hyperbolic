@@ -17,9 +17,11 @@ class Engine {
         void updateTail(bool isStatic);
         std::list<Vector> getTail();
 
+        void setTailLength(int l) { tailLength = l; }
+
         const Vector center;
 
     protected:
-        const int maxTail = 150;
+        int tailLength = 150;
         std::list<Vector> tail;
 };

@@ -135,3 +135,8 @@ void Canvas::moveTimeout() {
 void Canvas::tailTimeout() {
     engine->updateTail(vertDir == 0 && horDir == 0);
 }
+
+void Canvas::setTailLength(int l) {
+    engine->setTailLength(l);
+    update();
+}
