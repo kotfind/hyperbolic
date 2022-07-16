@@ -1,30 +1,30 @@
-#include "Widget.h"
+#include "Canvas.h"
 
 #include <QTimer>
 #include <QDebug>
 
 using namespace std;
 
-Widget::Widget(QWidget* parent) 
+Canvas::Canvas(QWidget* parent) 
         : QWidget(parent) {
     engine = new PlaneEngine;
 
     auto* tailTimer = new QTimer(this);
     connect(tailTimer, &QTimer::timeout,
-            this, &Widget::tailTimeout);
+            this, &Canvas::tailTimeout);
     tailTimer->start(10);
 
     auto* moveTimer = new QTimer(this);
     connect(moveTimer, &QTimer::timeout,
-            this, &Widget::moveTimeout);
+            this, &Canvas::moveTimeout);
     moveTimer->start(10);
 }
 
-Widget::~Widget() {
+Canvas::~Canvas() {
     // delete engine; // TODO
 }
 
-QPointF Widget::mapToScreen(const Vector& p) {
+QPointF Canvas::mapToScreen(const Vector& p) {
     double x = p.x;
     double y = p.y;
     y = -y;
@@ -36,14 +36,14 @@ QPointF Widget::mapToScreen(const Vector& p) {
     return {x, y};
 }
 
-double Widget::mapToScreen(double r) {
+double Canvas::mapToScreen(double r) {
     auto w = size().width();
     auto h = size().height();
     auto m = min(w, h) / 2;
     return r * m;
 }
 
-void Widget::keyPressEvent(QKeyEvent* e) {
+void Canvas::keyPressEvent(QKeyEvent* e) {
     switch(e->key()) {
         case Qt::Key_W:
         case Qt::Key_Up:
@@ -69,7 +69,7 @@ void Widget::keyPressEvent(QKeyEvent* e) {
     update();
 }
 
-void Widget::keyReleaseEvent(QKeyEvent* e) {
+void Canvas::keyReleaseEvent(QKeyEvent* e) {
     switch(e->key()) {
         case Qt::Key_W:
         case Qt::Key_Up:
@@ -95,14 +95,14 @@ void Widget::keyReleaseEvent(QKeyEvent* e) {
     update();
 }
 
-void Widget::paintEvent(QPaintEvent* e) {
+void Canvas::paintEvent(QPaintEvent* e) {
     Q_UNUSED(e);
 
     QPainter qp(this);
     draw(&qp);
 }
 
-void Widget::draw(QPainter* qp) {
+void Canvas::draw(QPainter* qp) {
     double r;
     // Draw circle
     r = mapToScreen(1);
@@ -127,11 +127,11 @@ void Widget::draw(QPainter* qp) {
     }
 }
 
-void Widget::moveTimeout() {
+void Canvas::moveTimeout() {
     engine->move(horDir, vertDir);
     update();
 }
 
-void Widget::tailTimeout() {
+void Canvas::tailTimeout() {
     engine->updateTail(vertDir == 0 && horDir == 0);
 }

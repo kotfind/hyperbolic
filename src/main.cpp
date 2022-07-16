@@ -1,11 +1,11 @@
-#include "Widget.h"
+#include "Canvas.h"
 
 #include <QApplication>
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
-    Widget win;
+    Canvas win;
     win.show();
     
     return app.exec();

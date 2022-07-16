@@ -8,10 +8,10 @@
 #include <QKeyEvent>
 #include <QTimerEvent>
 
-class Widget : public QWidget {
+class Canvas : public QWidget {
     public:
-        Widget(QWidget* parent = nullptr);
-        ~Widget();
+        Canvas(QWidget* parent = nullptr);
+        ~Canvas();
 
     private:
         Engine* engine;
