@@ -43,13 +43,6 @@ double Widget::mapToScreen(double r) {
     return r * m;
 }
 
-void Widget::paintEvent(QPaintEvent* e) {
-    Q_UNUSED(e);
-
-    QPainter qp(this);
-    draw(&qp);
-}
-
 void Widget::keyPressEvent(QKeyEvent* e) {
     switch(e->key()) {
         case Qt::Key_W:
@@ -102,11 +95,18 @@ void Widget::keyReleaseEvent(QKeyEvent* e) {
     update();
 }
 
+void Widget::paintEvent(QPaintEvent* e) {
+    Q_UNUSED(e);
+
+    QPainter qp(this);
+    draw(&qp);
+}
+
 void Widget::draw(QPainter* qp) {
     double r;
     // Draw circle
     r = mapToScreen(1);
-    qp->drawEllipse(mapToScreen({0, 0, 0}), r, r);
+    qp->drawEllipse(mapToScreen(engine->mapToGlobal({0, 0, 0})), r, r);
 
     // Brushes
     QBrush brush = qp->brush();

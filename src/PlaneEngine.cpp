@@ -14,14 +14,10 @@ void PlaneEngine::move(int horDir, int vertDir) {
     }
 }
 
-Vector PlaneEngine::getRealCenterPoint() const {
-    return -offset;
+Vector PlaneEngine::mapToGlobal(const Vector& pt) const {
+    return pt - offset;
 }
 
-std::list<Vector> PlaneEngine::getTail() const {
-    auto ans = tail;
-    for (auto& pt : ans) {
-        pt += offset;
-    }
-    return ans;
+Vector PlaneEngine::mapToLocal(const Vector& pt) const {
+    return pt + offset;
 }

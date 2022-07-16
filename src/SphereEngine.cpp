@@ -19,14 +19,10 @@ void SphereEngine::move(int horDir, int vertDir) {
     rMatrix.yrot(alpha * horDir, true);
 }
 
-Vector SphereEngine::getRealCenterPoint() const {
-    return Vector(0, 0, 1).projected(rMatrix);
+Vector SphereEngine::mapToGlobal(const Vector& pt) const {
+    return pt.projected(matrix);
 }
 
-list<Vector> SphereEngine::getTail() const {
-    list<Vector> ans = tail;
-    for (auto& pt : ans) {
-        pt = pt.projected(matrix);
-    }
-    return ans;
+Vector SphereEngine::mapToLocal(const Vector& pt) const {
+    return pt.projected(rMatrix);
 }

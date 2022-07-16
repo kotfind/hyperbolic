@@ -19,9 +19,9 @@ class Widget : public QWidget {
         QPointF mapToScreen(const Vector& p);
         double mapToScreen(double r);
 
-        void paintEvent(QPaintEvent*);
         void keyPressEvent(QKeyEvent*);
         void keyReleaseEvent(QKeyEvent*);
+        void paintEvent(QPaintEvent*);
 
         void draw(QPainter* qp);
 

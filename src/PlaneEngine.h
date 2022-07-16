@@ -7,8 +7,8 @@ class PlaneEngine : public Engine {
         PlaneEngine();
 
         void move(int horDir, int vertDir);
-        std::list<Vector> getTail() const;
-        Vector getRealCenterPoint() const;
+        Vector mapToGlobal(const Vector& pt) const;
+        Vector mapToLocal(const Vector& pt) const;
 
     private:
         Vector offset;
