@@ -20,7 +20,7 @@ class Engine {
         virtual Vector mapToLocal(const Vector& pt) const = 0;
         virtual EngineType getType() const = 0;
 
-        void updateTail(bool isStatic);
+        void updateTail();
         std::list<Vector> getTail();
 
         void setTailLength(int l) { tailLength = l; }

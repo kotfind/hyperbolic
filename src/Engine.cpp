@@ -9,9 +9,10 @@ Engine::Engine()
     tail.push_back(center);
 }
 
-void Engine::updateTail(bool isStatic) {
-    if (!isStatic) {
-        tail.push_back(mapToLocal(center));
+void Engine::updateTail() {
+    auto pt = mapToLocal(center);
+    if (tail.empty() || pt != tail.back()) {
+        tail.push_back(pt);
     }
     while (tail.size() > tailLength) {
         tail.pop_front();

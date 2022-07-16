@@ -27,3 +27,6 @@ Vector operator+(const Vector& lhs, const Vector& rhs);
 Vector operator-(const Vector& lhs, const Vector& rhs);
 Vector operator*(const Vector& lhs, double rhs);
 Vector operator*(double lhs, const Vector& rhs);
+
+bool operator==(const Vector& lhs, const Vector& rhs);
+bool operator!=(const Vector& lhs, const Vector& rhs);

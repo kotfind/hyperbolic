@@ -101,3 +101,16 @@ Vector operator*(const Vector& lhs, double rhs) {
 Vector operator*(double lhs, const Vector& rhs) {
     return rhs * lhs;
 }
+
+bool operator==(const Vector& lhs, const Vector& rhs) {
+    for (int i = 0; i < 3; ++i) {
+        if (lhs(i) != rhs(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool operator!=(const Vector& lhs, const Vector& rhs) {
+    return !(lhs == rhs);
+}
