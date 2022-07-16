@@ -17,6 +17,9 @@ class Canvas : public QWidget {
 
     private:
         Engine* engine;
+        PlaneEngine* planeEngine;
+        SphereEngine* sphereEngine;
+        Engine::EngineType engineType;
 
         QPointF mapToScreen(const Vector& p);
         double mapToScreen(double r);
@@ -35,4 +38,5 @@ class Canvas : public QWidget {
 
     public slots:
         void setTailLength(int l);
+        void setEngineType(Engine::EngineType type);
 };

@@ -7,7 +7,11 @@ using namespace std;
 
 Canvas::Canvas(QWidget* parent) 
         : QWidget(parent) {
-    engine = new PlaneEngine;
+    planeEngine = new PlaneEngine;
+    sphereEngine = new SphereEngine;
+
+    engineType = Engine::PlaneEngineType;
+    engine = planeEngine;
 
     auto* tailTimer = new QTimer(this);
     connect(tailTimer, &QTimer::timeout,
@@ -21,7 +25,9 @@ Canvas::Canvas(QWidget* parent)
 }
 
 Canvas::~Canvas() {
-    // delete engine; // TODO
+    engine = nullptr;
+    delete sphereEngine;
+    delete planeEngine;
 }
 
 QPointF Canvas::mapToScreen(const Vector& p) {
@@ -139,4 +145,17 @@ void Canvas::tailTimeout() {
 void Canvas::setTailLength(int l) {
     engine->setTailLength(l);
     update();
+}
+
+void Canvas::setEngineType(Engine::EngineType type) {
+    engineType = type;
+    switch(type) {
+        case Engine::PlaneEngineType:
+            engine = planeEngine;
+            break;
+
+        case Engine::SphereEngineType:
+            engine = sphereEngine;
+            break;
+    }
 }

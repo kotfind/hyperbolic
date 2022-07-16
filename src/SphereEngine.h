@@ -13,6 +13,7 @@ class SphereEngine : public Engine {
         void move(int horDir, int vertDir);
         Vector mapToGlobal(const Vector& pt) const;
         Vector mapToLocal(const Vector& pt) const;
+        EngineType getType() const { return SphereEngineType; }
 
     private:
         Matrix matrix;

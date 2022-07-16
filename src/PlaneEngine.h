@@ -9,6 +9,7 @@ class PlaneEngine : public Engine {
         void move(int horDir, int vertDir);
         Vector mapToGlobal(const Vector& pt) const;
         Vector mapToLocal(const Vector& pt) const;
+        EngineType getType() const { return PlaneEngineType; }
 
     private:
         Vector offset;

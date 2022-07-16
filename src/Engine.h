@@ -8,11 +8,17 @@
 
 class Engine {
     public:
+        enum EngineType {
+            PlaneEngineType,
+            SphereEngineType,
+        };
+
         Engine();
 
         virtual void move(int horDir, int vertDir) = 0;
         virtual Vector mapToGlobal(const Vector& pt) const = 0;
         virtual Vector mapToLocal(const Vector& pt) const = 0;
+        virtual EngineType getType() const = 0;
 
         void updateTail(bool isStatic);
         std::list<Vector> getTail();
@@ -25,3 +31,6 @@ class Engine {
         int tailLength = 150;
         std::list<Vector> tail;
 };
+
+Q_DECLARE_METATYPE(Engine::EngineType)
+

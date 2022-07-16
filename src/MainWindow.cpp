@@ -4,6 +4,7 @@
 #include <QFormLayout>
 #include <QSlider>
 #include <QFrame>
+#include <QComboBox>
 
 MainWindow::MainWindow(QWidget* parent)
         : QMainWindow(parent) {
@@ -26,6 +27,17 @@ MainWindow::MainWindow(QWidget* parent)
     auto* form = new QFormLayout;
     formFrame->setLayout(form);
 
+
+    // Geometry Combobox
+    auto* geomCombo = new QComboBox(this);
+    geomCombo->addItem(tr("Plane"), Engine::PlaneEngineType);
+    geomCombo->addItem(tr("Sphere"), Engine::SphereEngineType);
+    connect(geomCombo, &QComboBox::currentTextChanged, [=](const QString& s) {
+        canvas->setEngineType(geomCombo->currentData().value<Engine::EngineType>());
+    });
+    form->addRow(tr("Geometry Engine:"), geomCombo);
+
+    // Tail Length
     auto* tailLength = new QSlider(Qt::Horizontal);
     tailLength->setRange(0, 1000);
     tailLength->setValue(400);
