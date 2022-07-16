@@ -6,6 +6,7 @@ using namespace std;
 
 Engine::Engine()
     : center(0, 0, 1) {
+    tail.push_back(center);
 }
 
 void Engine::updateTail(bool isStatic) {

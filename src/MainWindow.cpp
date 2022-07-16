@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     // Tail Length
     auto* tailLength = new QSlider(Qt::Horizontal);
-    tailLength->setRange(0, 1000);
+    tailLength->setRange(1, 1000);
     tailLength->setValue(400);
     connect(tailLength, &QSlider::valueChanged,
             canvas, &Canvas::setTailLength);
