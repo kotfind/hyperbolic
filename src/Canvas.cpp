@@ -123,15 +123,11 @@ void Canvas::draw(QPainter* qp) {
     // Brushes
     QBrush brush = qp->brush();
     brush.setStyle(Qt::SolidPattern);
-    QPen pen = qp->pen();
-    pen.setWidthF(0.5);
-    qp->setPen(pen);
+    qp->setPen(Qt::NoPen);
 
     // Draw tail
     for (const auto& pt : engine->getTail()) {
-        auto color = pt.z > 0 ? Qt::red : Qt::green;
-
-        brush.setColor(color);
+        brush.setColor(QColor(255, 0, 0, 100 + 155 * (pt.z + 1) / 2));
         qp->setBrush(brush);
 
         r = (pt.z + 1) * 2 + 1;
