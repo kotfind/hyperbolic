@@ -5,6 +5,10 @@
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
+    auto font = app.font();
+    font.setPointSize(12);
+    app.setFont(font);
+
     MainWindow win;
     win.show();
     
