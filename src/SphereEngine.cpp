@@ -12,11 +12,11 @@ SphereEngine::SphereEngine() {
 }
 
 void SphereEngine::move(int horDir, int vertDir) {
-    matrix.xrot(alpha * vertDir);
-    matrix.yrot(alpha * horDir);
+    matrix.xrot(-alpha * vertDir);
+    matrix.yrot(-alpha * horDir);
 
-    rMatrix.xrot(alpha * vertDir, true);
-    rMatrix.yrot(alpha * horDir, true);
+    rMatrix.xrot(-alpha * vertDir, true);
+    rMatrix.yrot(-alpha * horDir, true);
 }
 
 Vector SphereEngine::mapToGlobal(const Vector& pt) const {
