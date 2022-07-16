@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Engine.h"
 #include "SphereEngine.h"
 #include "PlaneEngine.h"
