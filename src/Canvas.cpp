@@ -160,7 +160,9 @@ void Canvas::tailTimeout() {
 }
 
 void Canvas::setTailLength(int l) {
-    engine->setTailLength(l);
+    planeEngine->setTailLength(l);
+    sphereEngine->setTailLength(l);
+    hyperbolicEngine->setTailLength(l);
     update();
 }
 
