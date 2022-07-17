@@ -3,13 +3,14 @@
 #include <QDebug>
 #include <math.h>
 
-const double speed = 0.005;
+const double speed = 0.05;
 
 HyperbolicEngine::HyperbolicEngine() {
 }
 
 void HyperbolicEngine::move(double horDir, double vertDir) {
-    auto nOffset = offset - Vector(horDir, vertDir, 0) * speed;
+    auto d = tanh(speed / 2) * (1 - offset.len());
+    const auto nOffset = offset - Vector(horDir, vertDir, 0) * d;
     if (nOffset.len() < 1) {
         offset = nOffset;
     }
