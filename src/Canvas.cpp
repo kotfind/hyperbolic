@@ -52,64 +52,6 @@ double Canvas::mapToScreen(double r) {
     return r * m;
 }
 
-void Canvas::keyPressEvent(QKeyEvent* e) {
-    switch(e->key()) {
-        case Qt::Key_W:
-        case Qt::Key_Up:
-            vertDir += 1;
-            break;
-
-        case Qt::Key_S:
-        case Qt::Key_Down:
-            vertDir -= 1;
-            break;
-
-        case Qt::Key_D:
-        case Qt::Key_Right:
-            horDir += 1;
-            break;
-
-        case Qt::Key_A:
-        case Qt::Key_Left:
-            horDir -= 1;
-            break;
-    }
-
-    update();
-}
-
-void Canvas::keyReleaseEvent(QKeyEvent* e) {
-    switch(e->key()) {
-        case Qt::Key_W:
-        case Qt::Key_Up:
-            vertDir -= 1;
-            break;
-
-        case Qt::Key_S:
-        case Qt::Key_Down:
-            vertDir += 1;
-            break;
-
-        case Qt::Key_D:
-        case Qt::Key_Right:
-            horDir -= 1;
-            break;
-
-        case Qt::Key_A:
-        case Qt::Key_Left:
-            horDir += 1;
-            break;
-    }
-
-    update();
-}
-
-void Canvas::focusOutEvent(QFocusEvent* e) {
-    Q_UNUSED(e);
-    horDir = 0;
-    vertDir = 0;
-}
-
 void Canvas::paintEvent(QPaintEvent* e) {
     Q_UNUSED(e);
 
@@ -152,6 +94,7 @@ void Canvas::moveTimeout() {
     engine->move(
         max(-1., min(1., horDir)),
         max(-1., min(1., vertDir)));
+
     update();
 }
 

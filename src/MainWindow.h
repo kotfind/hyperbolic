@@ -11,5 +11,13 @@ class MainWindow : public QMainWindow {
         MainWindow(QWidget* parent = nullptr);
 
     private:
+        void keyPressEvent(QKeyEvent*);
+        void keyReleaseEvent(QKeyEvent*);
+        void focusOutEvent(QFocusEvent*);
+        void focusInEvent(QFocusEvent*);
+
+        double horDir = 0;
+        double vertDir = 0;
+
         Canvas* canvas;
 };

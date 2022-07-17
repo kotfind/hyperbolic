@@ -49,3 +49,65 @@ MainWindow::MainWindow(QWidget* parent)
     splitter->setStretchFactor(0, 5);
     splitter->setStretchFactor(1, 1);
 }
+
+void MainWindow::keyPressEvent(QKeyEvent* e) {
+    switch(e->key()) {
+        case Qt::Key_W:
+        case Qt::Key_Up:
+            vertDir += 1;
+            break;
+
+        case Qt::Key_S:
+        case Qt::Key_Down:
+            vertDir -= 1;
+            break;
+
+        case Qt::Key_D:
+        case Qt::Key_Right:
+            horDir += 1;
+            break;
+
+        case Qt::Key_A:
+        case Qt::Key_Left:
+            horDir -= 1;
+            break;
+    }
+
+    canvas->setDirs(horDir, vertDir);
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent* e) {
+    switch(e->key()) {
+        case Qt::Key_W:
+        case Qt::Key_Up:
+            vertDir -= 1;
+            break;
+
+        case Qt::Key_S:
+        case Qt::Key_Down:
+            vertDir += 1;
+            break;
+
+        case Qt::Key_D:
+        case Qt::Key_Right:
+            horDir -= 1;
+            break;
+
+        case Qt::Key_A:
+        case Qt::Key_Left:
+            horDir += 1;
+            break;
+    }
+
+    canvas->setDirs(horDir, vertDir);
+}
+
+void MainWindow::focusOutEvent(QFocusEvent* e) {
+    Q_UNUSED(e);
+    canvas->setDirs(0, 0);
+}
+
+void MainWindow::focusInEvent(QFocusEvent* e) {
+    Q_UNUSED(e);
+    canvas->setDirs(0, 0);
+}

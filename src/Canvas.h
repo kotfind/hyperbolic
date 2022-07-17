@@ -32,11 +32,7 @@ class Canvas : public QWidget {
         QPointF mapToScreen(const Vector& p);
         double mapToScreen(double r);
 
-        void keyPressEvent(QKeyEvent*);
-        void keyReleaseEvent(QKeyEvent*);
-        void focusOutEvent(QFocusEvent*);
         void paintEvent(QPaintEvent*);
-
         void draw(QPainter* qp);
 
         void moveTimeout();
@@ -48,7 +44,5 @@ class Canvas : public QWidget {
     public slots:
         void setTailLength(int l);
         void setEngineType(Engine::EngineType type);
-
-    private slots:
         void setDirs(double horDir, double vertDir);
 };
