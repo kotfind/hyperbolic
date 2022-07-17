@@ -26,3 +26,11 @@ Vector SphereEngine::mapToGlobal(const Vector& pt) const {
 Vector SphereEngine::mapToLocal(const Vector& pt) const {
     return pt.projected(rMatrix);
 }
+
+double SphereEngine::getBallRadius(const Vector& pt) const {
+    return (pt.z + 1) * 2 + 1;
+}
+
+QColor SphereEngine::getBallColor(const Vector& pt) const {
+    return {0, 0, 255, 100 + 155 * (pt.z + 1) / 2};
+}

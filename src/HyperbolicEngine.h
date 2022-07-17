@@ -11,6 +11,9 @@ class HyperbolicEngine : public Engine {
         Vector mapToLocal(const Vector& pt) const;
         EngineType getType() const { return HyperbolicEngineType; }
 
+        double getBallRadius(const Vector& pt) const;
+        QColor getBallColor(const Vector& pt) const;
+
     private:
         Vector offset;
 };

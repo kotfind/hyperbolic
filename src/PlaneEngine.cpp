@@ -21,3 +21,11 @@ Vector PlaneEngine::mapToGlobal(const Vector& pt) const {
 Vector PlaneEngine::mapToLocal(const Vector& pt) const {
     return pt + offset;
 }
+
+double PlaneEngine::getBallRadius(const Vector& pt) const {
+    return 3;
+}
+
+QColor PlaneEngine::getBallColor(const Vector& pt) const {
+    return QColor(0, 255, 0);
+}

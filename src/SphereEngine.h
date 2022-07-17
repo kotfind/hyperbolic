@@ -15,6 +15,9 @@ class SphereEngine : public Engine {
         Vector mapToLocal(const Vector& pt) const;
         EngineType getType() const { return SphereEngineType; }
 
+        double getBallRadius(const Vector& pt) const;
+        QColor getBallColor(const Vector& pt) const;
+
     private:
         Matrix matrix;
         Matrix rMatrix;

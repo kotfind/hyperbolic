@@ -4,6 +4,7 @@
 
 #include <QPaintEvent>
 #include <QPainter>
+#include <QColor>
 #include <list>
 
 class Engine {
@@ -20,6 +21,9 @@ class Engine {
         virtual Vector mapToGlobal(const Vector& pt) const = 0;
         virtual Vector mapToLocal(const Vector& pt) const = 0;
         virtual EngineType getType() const = 0;
+
+        virtual double getBallRadius(const Vector& pt) const = 0;
+        virtual QColor getBallColor(const Vector& pt) const = 0;
 
         void updateTail();
         std::list<Vector> getTail();

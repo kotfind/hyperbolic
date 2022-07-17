@@ -32,3 +32,11 @@ Vector HyperbolicEngine::mapToGlobal(const Vector& pt) const {
 Vector HyperbolicEngine::mapToLocal(const Vector& pt) const {
     return applyOffset(pt, -offset);
 }
+
+double HyperbolicEngine::getBallRadius(const Vector& pt) const {
+    return (1 - pt.len()) * 4 + 1;
+}
+
+QColor HyperbolicEngine::getBallColor(const Vector& pt) const {
+    return {255, 0, 0, 100 + 155 * (1 - pt.len())};
+}

@@ -134,10 +134,10 @@ void Canvas::draw(QPainter* qp) {
 
     // Draw tail
     for (const auto& pt : engine->getTail()) {
-        brush.setColor(QColor(255, 0, 0, 100 + 155 * (pt.z + 1) / 2));
+        brush.setColor(engine->getBallColor(pt));
         qp->setBrush(brush);
 
-        r = (pt.z + 1) * 2 + 1;
+        r = engine->getBallRadius(pt);
         qp->drawEllipse(mapToScreen(pt), r, r);
     }
 }
