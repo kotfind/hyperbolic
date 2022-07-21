@@ -2,39 +2,46 @@
 
 #include <QDebug>
 #include <math.h>
+#include <complex>
 
-const double speed = 0.05;
+using namespace std;
+
+const double speed = 0.007;
 
 HyperbolicEngine::HyperbolicEngine() {
 }
 
-void HyperbolicEngine::move(double horDir, double vertDir) {
-    auto d = tanh(speed / 2) * (1 - offset.len());
-    const auto nOffset = offset - Vector(horDir, vertDir, 0) * d;
-    if (nOffset.len() < 1) {
-        offset = nOffset;
-    }
+void HyperbolicEngine::appendOffset(complex<double> b1) {
+    auto a1 = sqrt(1. + pow(abs(b1), 2));
+    auto a2 = offsetA;
+    auto b2 = offsetB;
+    offsetA = a1 * a2 + conj(b1) * b2;
+    offsetB = conj(a1) * b2 + b1 * a2;
 }
 
-Vector applyOffset(const Vector& pt, const Vector& offset) {
-    auto x = pt; // XXX
-    x.z = 0;
-    const auto& v = offset;
-    return (v * (1 + 2 * v * x + x * x) + x * (1 - v * v)) /
-        // --------------------------------------------------
-            (1 + 2 * v * x + v * v * x * x);
+void HyperbolicEngine::move(double horDir, double vertDir) {
+    appendOffset(speed * horDir * -1);
+    appendOffset(speed * vertDir * 1i);
 }
 
 Vector HyperbolicEngine::mapToGlobal(const Vector& pt) const {
-    return applyOffset(pt, offset);
+    auto a = offsetA;
+    auto b = offsetB;
+    complex<double> z = pt.x + pt.y * 1i;
+    z = (a * z + conj(b)) / (b * z + conj(a));
+    return Vector(z.real(), z.imag(), 0);
 }
 
 Vector HyperbolicEngine::mapToLocal(const Vector& pt) const {
-    return applyOffset(pt, -offset);
+    auto a = conj(offsetA);
+    auto b = -offsetB;
+    complex<double> z = pt.x + pt.y * 1i;
+    z = (a * z + conj(b)) / (conj(a) + b * z);
+    return Vector(z.real(), z.imag(), 0);
 }
 
 double HyperbolicEngine::getBallRadius(const Vector& pt) const {
-    return (1 - pt.len()) * 4 + 1;
+    return (1 - pt.len()) * 3 + 1;
 }
 
 QColor HyperbolicEngine::getBallColor(const Vector& pt) const {
