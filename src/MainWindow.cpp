@@ -40,10 +40,10 @@ MainWindow::MainWindow(QWidget* parent)
 
     // Tail Length
     auto* tailLength = new QSlider(Qt::Horizontal);
-    tailLength->setRange(1, 1000);
-    tailLength->setValue(400);
     connect(tailLength, &QSlider::valueChanged,
             canvas, &Canvas::setTailLength);
+    tailLength->setRange(400, 2000);
+    tailLength->setValue(1000);
     form->addRow(tr("Tail Length:"), tailLength);
 
     splitter->setStretchFactor(0, 5);
